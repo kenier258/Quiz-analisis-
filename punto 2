@@ -1,0 +1,29 @@
+def valor_romano(r):
+    valores = {
+        'I': 1,
+        'V': 5,
+        'X': 10,
+        'L': 50,
+        'C': 100,
+        'D': 500,
+        'M': 1000
+    }
+    return valores[r]
+
+def romanosAEnteros(romano):
+    if not romano:
+        return 0
+
+    if len(romano) == 1:
+        return valor_romano(romano)
+
+    ultimo = romano[-1]
+    anterior = romano[-2]
+
+    if valor_romano(ultimo) > valor_romano(anterior):
+        return romanosAEnteros(romano[:-2]) + valor_romano(ultimo) - valor_romano(anterior)
+    else:
+        return romanosAEnteros(romano[:-1]) + valor_romano(ultimo)
+
+
+print(romanosAEnteros('XIV'))     
